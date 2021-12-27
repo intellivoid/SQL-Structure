@@ -6,6 +6,7 @@ create table if not exists inline_query
     location   char(255)       null comment 'Location of the user',
     query      text            not null comment 'Text of the query',
     offset     char(255)       null comment 'Offset of the result',
+    chat_type  char(255)       null comment 'Optional. Type of the chat, from which the inline query was sent.',
     created_at timestamp       null comment 'Entry date creation',
     constraint inline_query_ibfk_1
         foreign key (user_id) references user (id)
