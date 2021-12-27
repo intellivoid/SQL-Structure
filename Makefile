@@ -1,6 +1,14 @@
 clean:
 	rm -rf build
 
+all:
+	make all_intellivoid all_socialvoid all_tdlib
+	rm -f build/all.sql
+	touch build/all.sql
+	cat build/intellivoid.sql >> build/all.sql
+	cat build/socialvoid.sql >> build/all.sql
+	cat build/tdlib.sql >> build/all.sql
+
 all_intellivoid:
 	make coffeehouse intellivoid intellivoid_api intellivoid_suite khm openblu spam_protection
 	rm -f build/intellivoid.sql
@@ -19,6 +27,13 @@ all_socialvoid:
 	touch build/socialvoid.sql
 	cat build/socialvoid/socialvoid_master.sql >> build/socialvoid.sql
 	cat build/socialvoid/socialvoid_slave.sql >> build/socialvoid.sql
+
+all_tdlib:
+	make tdlib tdlib_spamprotectionbot tdlib_intellivoidbot
+	rm -f build/tdlib.sql
+	touch build/tdlib.sql
+	cat build/tdlib/spamprotectionbot.sql >> build/tdlib.sql
+	cat build/tdlib/intellivoidbot.sql >> build/tdlib.sql
 
 coffeehouse:
 	@mkdir -p build
@@ -141,3 +156,42 @@ socialvoid_slave:
 	cat database_src/socialvoid_slave/posts_quotes.sql >> build/socialvoid/socialvoid_slave.sql
 	cat database_src/socialvoid_slave/posts_replies.sql >> build/socialvoid/socialvoid_slave.sql
 	cat database_src/socialvoid_slave/posts_reposts.sql >> build/socialvoid/socialvoid_slave.sql
+
+tdlib:
+	@mkdir -p build
+	@mkdir -p build/tdlib
+	rm -f build/tdlib/tdlib.sql
+	touch build/tdlib/tdlib.sql
+	cat database_src/tdlib/user.sql >> build/tdlib/tdlib.sql
+	cat database_src/tdlib/chat.sql >> build/tdlib/tdlib.sql
+	cat database_src/tdlib/user_chat.sql >> build/tdlib/tdlib.sql
+	cat database_src/tdlib/inline_query.sql >> build/tdlib/tdlib.sql
+	cat database_src/tdlib/chosen_inline_result.sql >> build/tdlib/tdlib.sql
+	cat database_src/tdlib/message.sql >> build/tdlib/tdlib.sql
+	cat database_src/tdlib/edited_message.sql >> build/tdlib/tdlib.sql
+	cat database_src/tdlib/callback_query.sql >> build/tdlib/tdlib.sql
+	cat database_src/tdlib/shipping_query.sql >> build/tdlib/tdlib.sql
+	cat database_src/tdlib/pre_checkout_query.sql >> build/tdlib/tdlib.sql
+	cat database_src/tdlib/poll.sql >> build/tdlib/tdlib.sql
+	cat database_src/tdlib/poll_answer.sql >> build/tdlib/tdlib.sql
+	cat database_src/tdlib/chat_member_updated.sql >> build/tdlib/tdlib.sql
+	cat database_src/tdlib/chat_join_request.sql >> build/tdlib/tdlib.sql
+	cat database_src/tdlib/telegram_update.sql >> build/tdlib/tdlib.sql
+	cat database_src/tdlib/conversation.sql >> build/tdlib/tdlib.sql
+	cat database_src/tdlib/request_limiter.sql >> build/tdlib/tdlib.sql
+
+tdlib_spamprotectionbot:
+	@mkdir -p build
+	@mkdir -p build/tdlib
+	rm -f build/tdlib/spamprotectionbot.sql
+	touch build/tdlib/spamprotectionbot.sql
+	cat database_src/tdlib/spamprotectionbot_database.sql >> build/tdlib/spamprotectionbot.sql
+	cat build/tdlib/tdlib.sql >> build/tdlib/spamprotectionbot.sql
+
+tdlib_intellivoidbot:
+	@mkdir -p build
+	@mkdir -p build/tdlib
+	rm -f build/tdlib/intellivoidbot.sql
+	touch build/tdlib/intellivoidbot.sql
+	cat database_src/tdlib/intellivoidbot_database.sql >> build/tdlib/intellivoidbot.sql
+	cat build/tdlib/tdlib.sql >> build/tdlib/intellivoidbot.sql
