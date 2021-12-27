@@ -10,7 +10,7 @@ all:
 	cat build/tdlib.sql >> build/all.sql
 
 all_intellivoid:
-	make coffeehouse intellivoid intellivoid_api intellivoid_suite khm openblu spam_protection
+	make coffeehouse intellivoid intellivoid_api intellivoid_suite khm openblu spam_protection synical
 	rm -f build/intellivoid.sql
 	touch build/intellivoid.sql
 	cat build/intellivoid/coffeehouse.sql >> build/intellivoid.sql
@@ -20,6 +20,7 @@ all_intellivoid:
 	cat build/intellivoid/khm.sql >> build/intellivoid.sql
 	cat build/intellivoid/openblu.sql >> build/intellivoid.sql
 	cat build/intellivoid/spam_protection.sql >> build/intellivoid.sql
+	cat build/intellivoid/synical.sql >> build/intellivoid.sql
 
 all_socialvoid:
 	make socialvoid_master socialvoid_slave
@@ -157,6 +158,14 @@ socialvoid_slave:
 	cat database_src/socialvoid_slave/posts_replies.sql >> build/socialvoid/socialvoid_slave.sql
 	cat database_src/socialvoid_slave/posts_reposts.sql >> build/socialvoid/socialvoid_slave.sql
 
+synical:
+	@mkdir -p build
+	@mkdir -p build/intellivoid
+	rm -f build/intellivoid/synical.sql
+	touch build/intellivoid/synical.sql
+	cat database_src/intellivoid/synical/database.sql >> build/intellivoid/synical.sql
+	cat database_src/intellivoid/synical/chat_member_cache.sql >> build/intellivoid/synical.sql
+
 tdlib:
 	@mkdir -p build
 	@mkdir -p build/tdlib
@@ -195,3 +204,11 @@ tdlib_intellivoidbot:
 	touch build/tdlib/intellivoidbot.sql
 	cat database_src/tdlib/intellivoidbot_database.sql >> build/tdlib/intellivoidbot.sql
 	cat build/tdlib/tdlib.sql >> build/tdlib/intellivoidbot.sql
+
+tdlib_synicalbot:
+	@mkdir -p build
+	@mkdir -p build/tdlib
+	rm -f build/tdlib/synicalbot.sql
+	touch build/tdlib/synicalbot.sql
+	cat database_src/tdlib/synicalbot_database.sql >> build/tdlib/synicalbot.sql
+	cat build/tdlib/tdlib.sql >> build/tdlib/synicalbot.sql
