@@ -2,7 +2,7 @@ create table if not exists known_devices
 (
     id                  varchar(126) not null comment 'Unique Identification of this known device'
         primary key,
-    ip_address          varchar(126) not null comment 'The IP address of the host',
+    ip_address          varchar(126) null comment 'The IP address of the host',
     device_fingerprint  varchar(126) null comment 'The fingerprint of the device',
     properties          blob         null comment 'ZiProto encoded blob of properties associated with this device',
     last_seen_timestamp int          null comment 'The Unix Timestamp for when this device and host was last seen',
